@@ -1,0 +1,145 @@
+
+
+// const sliderElem = document.querySelector('.categories__slider');
+// const slider = ItcSlider.getInstance(sliderElem);
+
+// Video swiper
+const swiperVideo = new Swiper('.video__slider', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+    // slidesPerView: 4,
+    // If we need pagination
+    // pagination: {
+    //   el: '.swiper-pagination',
+    //   clickable: true,
+    // },
+
+    // Navigation arrows
+    // navigation: {
+    //   nextEl: '.categories__slider--next',
+    //   prevEl: '.categories__slider--prev',
+    // },
+    // autoplay: {
+    //     delay: 3000,
+    // },
+    // speed: 1000,
+    // // effect: 'fade',
+    
+});
+
+
+
+// tabs
+
+const tabsBtn = document.querySelectorAll('.goods-btn');
+const tabsItems = document.querySelectorAll('.goods-content');
+
+tabsBtn.forEach(function (item) {
+    item.addEventListener('click', function () {
+        let currentBtn = item;
+        let tabId = currentBtn.getAttribute('data-tab');
+        let currentTab = document.querySelector(tabId);
+
+        if (!currentBtn.classList.contains('active')) {
+            tabsBtn.forEach(function (item) {
+                item.classList.remove('active');
+            });
+
+            tabsItems.forEach(function (item) {
+                item.classList.remove('active');
+            });
+
+            currentBtn.classList.add('active');
+            currentTab.classList.add('active');
+        }
+    })
+});
+
+/* Скрыть /показать саблист */
+
+
+const btns = document.querySelectorAll('.categories__list-item');
+const wrapper = document.querySelector('.categories__wrapper');
+const submenu = document.querySelector('.categories__submenu');
+const linkItems = document.querySelectorAll('.categories__submenu-item');
+const slider = document.querySelector('.categories__slider-box');
+
+btns.forEach(function (item) {
+
+    item.addEventListener('mouseover', function () {
+        let currentBtn = item;
+        let linkId = currentBtn.getAttribute('data-link');
+        let currentItem = document.querySelector(linkId);
+
+        if (!currentBtn.classList.contains('active')) {
+            btns.forEach(function (item) {
+                item.classList.remove('active');
+            });
+
+            linkItems.forEach(function (item) {
+                item.classList.remove('active');
+            });
+
+            currentBtn.classList.add('active');
+            currentItem.classList.add('active');
+            // swiper.disable()
+            swiper.init();
+            swiper.navigation.update()
+        }
+
+        submenu.classList.add('show');
+        slider.classList.add('hidden');
+    });
+    item.addEventListener('click', function () {
+        submenu.classList.toggle('show');
+        
+        
+        if (submenu.classList.contains('show')) {
+            slider.classList.add('hidden');
+        } else {
+            slider.classList.remove('hidden');
+            swiper.init();
+            swiper.navigation.update()
+
+            // swiper.enable()
+            // swiper.updateProgress()
+            // swiper.navigation.update()
+        }
+        
+        // swiper.init()
+        
+
+    });
+
+    
+});
+
+
+
+const swiper = new Swiper('.categories__slider', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+
+    // If we need pagination
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+
+    // Navigation arrows
+    navigation: {
+        nextEl: '.categories__slider--next',
+        prevEl: '.categories__slider--prev',
+    },
+    autoplay: {
+        delay: 3000,
+    },
+    // speed: 1000,
+    // effect: 'fade',
+
+    // createElements: true,
+    observerParents: true,
+    // observer: true,
+});
